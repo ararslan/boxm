@@ -31,7 +31,7 @@ boxmtest <- function(X, groups) {
 
     if (p <= 5 && g <= 5) {
         stat <- (1 - u) * M
-        return(list(statistic = stat, df = df, pvalue = pchisq(stat, df, lower.tail = TRUE)))
+        return(list(statistic = stat, df = df, pvalue = pchisq(stat, df, lower.tail = FALSE)))
     } else {
         a <- (sum(1 / (n - 1)^2) - 1 / Ng^2) * (p^2 + p - 2) / (6 * (g - 1))
         df2 <- as.integer((df + 2) / abs(a - u^2))
@@ -46,6 +46,6 @@ boxmtest <- function(X, groups) {
         # Hopefully the type III case (a == u^2) will be taken care of by the chisq case
         # above, since df2 will be infinite so the statistic is ~ chisq(df)
 
-        return(list(stat = stat, df = c(df, df2), pvalue = pf(stat, df, df2, lower.tail = TRUE)))
+        return(list(stat = stat, df = c(df, df2), pvalue = pf(stat, df, df2, lower.tail = FALSE)))
     }
 }
