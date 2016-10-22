@@ -22,18 +22,18 @@ boxmtest <- function(X, groups) {
     Ng <- N - g
 
     Si <- lapply(levels(groups), function(i) cov(X[groups == i, ]))
-    Sp <- Reduce("+", lapply(1:g, function(i) (nl[[i]] - 1) * Si[[i]])) / N
+    Sp <- Reduce("+", lapply(1:g, function(i) (nl[[i]] - 1) * Si[[i]])) / Ng
 
     u <- (sum(1 / (n - 1)) - 1 / Ng) * ((2 * p^2 + 3 * p - 1) / (6 * (p + 1) * (g - 1)))
     M <- Ng * log(det(Sp)) - sum((n - 1) * sapply(Si, function(x) log(det(x))))
 
-    df <- as.integer(p * (p + 1) * (g - 1) / 2)
+    df <- as.integer((p * (p + 1) * (g - 1)) %/% 2)
 
     if (p <= 5 && g <= 5) {
         stat <- (1 - u) * M
         return(list(statistic = stat, df = df, pvalue = pchisq(stat, df, lower.tail = TRUE)))
     } else {
-        a <- (sum(1 / (n - 1)^2) - 1 / N^2) * (p^2 + p - 2) / (6 * (g - 1))
+        a <- (sum(1 / (n - 1)^2) - 1 / Ng^2) * (p^2 + p - 2) / (6 * (g - 1))
         df2 <- as.integer((df + 2) / abs(a - u^2))
 
         if (a > u^2) {  # Pearson's type VI curve
