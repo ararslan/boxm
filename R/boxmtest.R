@@ -28,7 +28,7 @@ boxmtest <- function(X, groups) {
 
     df <- as.integer(p * (p + 1) * (g - 1) / 2)
 
-    if (all(n > 20) && p <= 5 && g <= 5) {
+    if (p <= 5 && g <= 5) {
         stat <- (1 - u) * M
         return(list(statistic = stat, df = df, pvalue = pchisq(stat, df, lower.tail = FALSE)))
     } else {
