@@ -19,12 +19,13 @@ boxmtest <- function(X, groups) {
     nl <- as.list(setNames(n, levels(groups)))
 
     g <- nlevels(groups)
+    Ng <- N - g
 
     Si <- lapply(levels(groups), function(i) cov(X[groups == i, ]))
     Sp <- Reduce("+", lapply(1:g, function(i) (nl[[i]] - 1) * Si[[i]])) / N
 
-    u <- (sum(1 / (n - 1)) - 1 / N) * ((2 * p^2 + 3 * p - 1) / (6 * (p + 1) * (g - 1)))
-    M <- N * log(det(Sp)) - sum((n - 1) * sapply(Si, function(x) log(det(x))))
+    u <- (sum(1 / (n - 1)) - 1 / Ng) * ((2 * p^2 + 3 * p - 1) / (6 * (p + 1) * (g - 1)))
+    M <- Ng * log(det(Sp)) - sum((n - 1) * sapply(Si, function(x) log(det(x))))
 
     df <- as.integer(p * (p + 1) * (g - 1) / 2)
 
