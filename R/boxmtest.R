@@ -8,6 +8,9 @@ boxmtest <- function(X, groups) {
     if (length(groups) != nrow(X)) {
         stop("groups must have length equal to the number of rows in X")
     }
+    if (nlevels(groups) < 2) {
+        stop("groups has fewer than 2 levels.")
+    }
 
     N <- NROW(X)
     p <- NCOL(X)
