@@ -1,0 +1,9 @@
+Package: boxm
+Type: Package
+Title: Box M-Test for Equality of Covariance Matrices
+Version: 0.0.1
+Author: Alex Arslan
+Maintainer: Alex Arslan <ararslan@comcast.net>
+Description: Compute the Box M-test for equality of covariance matrices
+License: MIT
+LazyData: TRUE
