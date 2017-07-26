@@ -46,6 +46,6 @@ boxmtest <- function(X, groups) {
         # Hopefully the type III case (a == u^2) will be taken care of by the chisq case
         # above, since df2 will be infinite so the statistic is ~ chisq(df)
 
-        return(list(stat = stat, df = c(df, df2), pvalue = pf(stat, df, df2, lower.tail = FALSE)))
+        return(list(statistic = stat, df = c(df, df2), pvalue = pf(stat, df, df2, lower.tail = FALSE)))
     }
 }
